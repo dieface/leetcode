@@ -33,13 +33,14 @@ Google: 90% of our engineers use the software you wrote (Homebrew), but you canâ
  * @return {TreeNode}
  */
 var invertTree = function(root) {
-    if(root) {} else { return root; }
-    if(root.left) {
-    } else {
-        if(root.right) {} else {
-            return root;
-        }
+  if(root) {} else { return root; }
+
+  if(root.left) {
+  } else {
+    if(root.right) {} else {
+      return root;
     }
+  }
 
   var left = root.left;
   var right = root.right;
