@@ -27,5 +27,5 @@ var maxDepth = function(root) {
   var left = maxDepth(root.left);
   var right = maxDepth(root.right);
 
-  return Math.min(left, right) + 1;
+  return Math.max(left, right) + 1;
 };
