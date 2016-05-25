@@ -18,19 +18,25 @@ Could you solve it with constant space complexity? (Note: The output array does 
  * @return {number[]}
  */
 var productExceptSelf = function(nums) {
-  var products = [];
+  var result = [];
 
-  nums.forEach(function(n, idx) {
-    if(!products[idx]) products[idx] = 1
-
-    for(var i = 0; i < nums.length; i++) {
-      if(i === idx) continue;
-
-      products[idx] *= nums[i];
-    }
+  nums.forEach(function(n) {
+    result.push(1);
   });
 
-  return products;
+  var left = 1;
+  for(var i = 0; i < nums.length - 1; i++) {
+    left *= nums[i];
+    result[i + 1] = left;
+  }
+
+  var right = 1;
+  for(var i = nums.length - 1; i > 0; i--) {
+    right *= nums[i];
+    result[i-1] *= right;
+  }
+
+  return result;
 };
 
 var input = [1,2,3,4];
