@@ -39,6 +39,79 @@ var productExceptSelf = function(nums) {
   return result;
 };
 
+
+//function CursorFromStart(nums){
+//    // NOTE cursor to an array recording product in left side
+//    this.index = 1;
+//    this.productLeft = nums[0];
+//    this.offsetRight = function(){
+//        this.productLeft = this.productLeft * nums[this.index];
+//        this.index++;
+//
+//        console.log('left product: ', this.productLeft);
+//        console.log('left index: ', this.index);
+//    };
+//}
+//
+//function CursorFromEnd(nums){
+//    // NOTE cursor to an array recording product in right side
+//    this.index = 0;
+//    this.productRight = productRightSide(1, nums);   // NOTE start from index 1
+//    this.offsetRight = function(){
+//        if (nums[this.index+1] !== 0){
+//            this.productRight = this.productRight / nums[this.index+1];
+//        } else {
+//            this.productRight = productRightSide(this.index+2, nums);
+//        }
+//        this.index++;
+//
+//        console.log('right product: ', this.productRight);
+//        console.log('right index: ', this.index);
+//    };
+//}
+//
+//function productRightSide(index, array){
+//    var result = 1;
+//    array.slice(index, array.length).forEach(function(n){
+//        result *= n;
+//    });
+//    return result;
+//}
+//
+//var productExceptSelf = function(nums) {
+//
+//    var result = [],
+//        cur = new CursorFromStart(nums),
+//        curFromEnd = new CursorFromEnd(nums);
+//
+//    // get first result from curFromEnd
+//    result.push(curFromEnd.productRight);
+//    console.log('init result: ', result);
+//    console.log('init cur: ', cur);
+//    console.log('init curFromEnd: ', curFromEnd);
+//    curFromEnd.offsetRight();
+//
+//    // NOTE start from index 1
+//    for (var i = 1; i < nums.length; i++) {
+//        console.log('------ i: ', i);
+//
+//
+//        console.log('cur: ', cur.productLeft);
+//        console.log('curFromEnd: ', curFromEnd.productRight);
+//
+//        result.push(cur.productLeft * curFromEnd.productRight);
+//        console.log('result: ', result);
+//
+//        console.log('- cur offset -');
+//        cur.offsetRight();
+//
+//        console.log('- curFromEnd offset -');
+//        curFromEnd.offsetRight();
+//    }
+//
+//    return result;
+//};
+
 var input = [1,2,3,4];
 var output = productExceptSelf(input);
 
