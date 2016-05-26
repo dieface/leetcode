@@ -28,4 +28,30 @@ var topKFrequent = function(nums, k) {
       times[n]++;
     }
   });
+
+  var elements = Object.keys(times);
+  var counts = elements.map(function(e){
+    return times[e];
+  });
+
+  var result = [];
+  for(var i = 0; i < k; i++) {
+    var maxNum = Math.max.apply(null, counts);
+    var maxIndex = counts.indexOf(maxNum);
+    var maxElem = elements[maxIndex];
+
+    counts.splice(maxIndex, 1);
+    elements.splice(maxIndex, 1);
+
+    result.push(parseInt(maxElem));
+  }
+
+  return result;
 };
+
+var input = [1,1,1,2,2,3, 3, 3, 3];
+var rank = 2;
+var output = topKFrequent(input, rank);
+
+console.log('input: ', input);
+console.log('output: ', output);
