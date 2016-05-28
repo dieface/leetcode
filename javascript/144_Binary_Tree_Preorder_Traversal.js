@@ -29,7 +29,7 @@ Note: Recursive solution is trivial, could you do it iteratively?
  * @return {number[]}
  */
 var preorderTraversal = function(root) {
-  if(root) {} else { return []; }
+  if(root) {} else { return root; }
 
   var vals = [];
 
