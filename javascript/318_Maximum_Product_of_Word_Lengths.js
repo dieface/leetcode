@@ -26,47 +26,39 @@ No such pair of words.
  * @return {number}
  */
 var maxProduct = function(words) {
+  var max = 0;
 
-  var az = new Set();
-  az.add('a');
-  az.add('b');
-  az.add('c');
-  az.add('d');
-  az.add('e');
-  az.add('f');
-  az.add('g');
-  az.add('h');
-  az.add('i');
-  az.add('j');
-  az.add('k');
-  az.add('l');
-  az.add('m');
-  az.add('n');
-  az.add('o');
-  az.add('p');
-  az.add('q');
-  az.add('r');
-  az.add('s');
-  az.add('t');
-  az.add('u');
-  az.add('v');
-  az.add('w');
-  az.add('x');
-  az.add('y');
-  az.add('z');
+  for(var i = 0; i < words.length - 1; i++) {
+    var w1 = words[i];
 
-        ml = collections.defaultdict(int)
-        for w in words:
-            num = sum( 1 << (ord(x) - ord( 'a' )) for x in set(w))
-            ml[num] = max(ml[num], len(w))
-            for x in set(string.lowercase) - set(w):
-                es[ord(x) - ord( 'a' )].add(num)
-        ans = 0
-        for w in words:
-            r = [es[ord(x) - ord( 'a' )] for x in w]
-             if  not r: continue
-            r = set.intersection(*r)
-            for x in r:
-                ans = max(ans, len(w) * ml[x])
-        return ans
+    for(var j = i + 1; j < words.length; j++) {
+      var w2 = words[j];
+
+      if(!hasCommon(w1, w2)) {
+        var product = w1.length * w2.length;
+        if(product > max) max = product;
+      }
+    }
+  }
+
+  return max;
+
+  function hasCommon(w1, w2) {
+    var checklist = new Set();
+
+    var len1 = w1.length;
+    var len2 = w2.length;
+
+    for(var i = 0; i < len1; i++) {
+      var ch = w1[i];
+      if(!checklist.has(ch)) { checklist.add(ch); }
+    }
+
+    for(var j = 0; j < len2; j++) {
+      var ch = w2[j];
+      if(checklist.has(ch)) return true;
+    }
+
+    return false;
+  }
 };
