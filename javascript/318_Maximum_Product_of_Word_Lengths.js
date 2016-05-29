@@ -26,39 +26,46 @@ No such pair of words.
  * @return {number}
  */
 var maxProduct = function(words) {
-  var max = 0;
+    var len = words.length,
+        arr = [],
+        result = 0,
+        i,
+        j;
 
-  for(var i = 0; i < words.length - 1; i++) {
-    var w1 = words[i];
+    for (i = 0; i < len; i++) {
+        // console.log('i: ', i);
+        // console.log('word: ', words[i]);
 
-    for(var j = i + 1; j < words.length; j++) {
-      var w2 = words[j];
+        arr[i] = 0;
+        // console.log('reset arr: ', arr);
 
-      if(!hasCommon(w1, w2)) {
-        var product = w1.length * w2.length;
-        if(product > max) max = product;
-      }
-    }
-  }
+        for (j = 0; j < words[i].length; j++) {
+            // console.log('j: ', j);
+            // console.log('ch: ', words[i].split('')[j]);
+            // console.log('code: ', words[i].charCodeAt(j));
+            // console.log('code - 97: ', words[i].charCodeAt(j) - 97);
+            // console.log('shifted code - 97: ', 2 << (words[i].charCodeAt(j) - 97));
 
-  return max;
+            arr[i] |= (4 << (words[i].charCodeAt(j)));
+            // console.log('arr: ', arr);
 
-  function hasCommon(w1, w2) {
-    var checklist = new Set();
-
-    var len1 = w1.length;
-    var len2 = w2.length;
-
-    for(var i = 0; i < len1; i++) {
-      var ch = w1[i];
-      if(!checklist.has(ch)) { checklist.add(ch); }
-    }
-
-    for(var j = 0; j < len2; j++) {
-      var ch = w2[j];
-      if(checklist.has(ch)) return true;
+        }
+        // console.log('--------------------------');
     }
 
-    return false;
-  }
+    for (i = 0; i < len; i++) {
+        for (j = i + 1; j < len; j++) {
+            if ((arr[i] & arr[j]) === 0) {
+                result = Math.max(result, words[i].length * words[j].length);
+            }
+        }
+    }
+
+    return result;
 };
+
+
+var input = ["abcw","baz","foo","bar","xtfn","abcdef"];
+var output = maxProduct(input);
+
+console.log('output: ', output);
