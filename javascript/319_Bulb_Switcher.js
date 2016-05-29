@@ -22,50 +22,18 @@ So you should return 1, because there is only one bulb is on.
  * @return {number}
  */
 var bulbSwitch = function(n) {
-  function setup(arr) {
-    for(var i = 1; i < n + 1; i++) {
-        arr.push(i % 2);
-    }
-  }
-
-  function toggle(status) {
-
-    if(status) {
-      return 0;
-    }
-
-    return 1;
-  }
-
-  switch (n) {
-    case 0:
-      return 0;
-    case 1:
-      return n;
-    case 2:
-      return Math.floor(n/2);
-    default:
-      var arr = [];
-      setup(arr);
-      //console.log('setup: ', arr);
-
-      for(var i = 3; i < n - 1; i++) {
-        //console.log('arr: ', arr);
-
-        for(var j = i - 1; j < n - 1; j+=i) {
-          var newStatus = toggle(arr[j]);
-          arr = arr.slice(0, j).concat(newStatus).concat(arr.slice(j + 1));
-        }
-      }
-
-      //console.log('after loop: ', arr);
-
-      var last = arr.pop();
-      arr.push(toggle(last));
-      //console.log('final: ', arr);
-
-      return arr.filter(function(status) { return status;}).length;
-  }
+// 0 0 0 0 0 0 0 0 0 0    0
+// 1 1 1 1 1 1 1 1 1 1    1
+// 1 0 1 0 1 0 1 0 1 0    2
+// 1 0 0 0 1 1 1 0 0 0    3
+// 1 0 0 1 1 1 1 1 0 0    4
+// 1 0 0 1 0 1 1 1 0 1    5
+// 1 0 0 1 0 0 1 1 0 1    6
+// 1 0 0 1 0 0 0 1 0 1    7
+// 1 0 0 1 0 0 0 0 0 1    8
+// 1 0 0 1 0 0 0 0 1 1    9
+// 1 0 0 1 0 0 0 0 1 0    10
+  return Math.floor(Math.sqrt(n));
 };
 
 var input = 8;
